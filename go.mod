@@ -6,11 +6,10 @@ toolchain go1.24.0
 
 require (
 	github.com/mark3labs/mcp-go v0.31.0
-	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
-	github.com/wailsapp/wails/v2 v2.10.1
+	github.com/wailsapp/wails/v2 v2.10.2
 )
 
-require github.com/chai2010/webp v1.4.0
+require github.com/gorilla/websocket v1.5.3 // indirect
 
 require (
 	github.com/bep/debounce v1.2.1 // indirect
@@ -38,7 +37,6 @@ require (
 	github.com/wailsapp/mimetype v1.4.1 // indirect
 	github.com/yosida95/uritemplate/v3 v3.0.2 // indirect
 	golang.org/x/crypto v0.33.0 // indirect
-	golang.org/x/image v0.28.0
 	golang.org/x/net v0.35.0 // indirect
 	golang.org/x/sys v0.30.0 // indirect
 	golang.org/x/text v0.26.0 // indirect

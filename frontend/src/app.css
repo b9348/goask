@@ -3,20 +3,73 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-    padding: 15px;
     box-sizing: border-box;
 }
 
 /* 上层：JSON数据显示区域 */
 .json-display-section {
-    flex: 1;
-    min-height: 0;
+    height: 300px;
+    min-height: 200px;
+    max-height: 80vh;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 10px;
     margin-bottom: 10px;
     background-color: #f9f9f9;
     overflow: hidden;
+    resize: vertical;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* 调整手柄样式 */
+.json-display-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(-45deg, transparent 0%, transparent 40%, #ccc 40%, #ccc 50%, transparent 50%, transparent 90%, #ccc 90%);
+    cursor: nw-resize;
+    border-bottom-right-radius: 8px;
+}
+
+.json-display-section:hover::after {
+    background: linear-gradient(-45deg, transparent 0%, transparent 40%, #999 40%, #999 50%, transparent 50%, transparent 90%, #999 90%);
+}
+
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.header-section h5 {
+    margin: 0;
+}
+
+
+
+.markdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.markdown-toggle input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.toggle-text {
+    color: #666;
+    user-select: none;
 }
 
 .json-display-section h5 {
@@ -30,7 +83,7 @@
     border: 3px solid #e0e0e0;
     border-radius: 4px;
     padding: 10px;
-    height: 60%;
+    flex: 1;
     overflow-y: auto;
     font-family: 'Courier New', monospace;
     font-size: 12px;
@@ -39,6 +92,149 @@
     color: #333;
     text-align: left;
     line-height: 1.4;
+    min-height: 100px;
+}
+
+/* Markdown 样式 - 紧凑版本 */
+.json-content h1, .json-content h2, .json-content h3 {
+    margin: 8px 0 4px 0;
+    color: #333;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.2;
+}
+
+.json-content h1 {
+    font-size: 18px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 2px;
+}
+
+.json-content h2 {
+    font-size: 16px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 1px;
+}
+
+.json-content h3 {
+    font-size: 14px;
+}
+
+.json-content strong {
+    font-weight: bold;
+    color: #333;
+}
+
+.json-content em {
+    font-style: italic;
+    color: #666;
+}
+
+.json-content code {
+    background-color: #f1f3f4;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: #d73a49;
+}
+
+.json-content pre {
+    background-color: #f8f8f8;
+    border: 1px solid #e1e4e8;
+    border-radius: 4px;
+    padding: 8px 12px;
+    overflow-x: auto;
+    margin: 8px 0;
+    line-height: 1.3;
+}
+
+.json-content pre code {
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    color: #333;
+}
+
+.json-content blockquote {
+    border-left: 3px solid #dfe2e5;
+    padding-left: 12px;
+    margin: 8px 0;
+    color: #6a737d;
+    font-style: italic;
+    background-color: #f9f9f9;
+    padding: 8px 12px;
+    border-radius: 3px;
+}
+
+.json-content ul, .json-content ol {
+    margin: 8px 0;
+    padding-left: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.json-content li {
+    margin: 2px 0;
+    line-height: 1.3;
+}
+
+.json-content hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 12px 0;
+}
+
+.json-content a {
+    color: #0366d6;
+    text-decoration: none;
+}
+
+.json-content a:hover {
+    text-decoration: underline;
+}
+
+.json-content p {
+    margin: 6px 0;
+    line-height: 1.4;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* 任务列表样式 */
+.json-content input[type="checkbox"] {
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.json-content li input[type="checkbox"] {
+    margin-right: 6px;
+}
+
+/* 表格样式 */
+.json-content table {
+    border-collapse: collapse;
+    margin: 12px 0;
+    width: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.json-content th, .json-content td {
+    border: 1px solid #ddd;
+    padding: 6px 12px;
+    text-align: left;
+}
+
+.json-content th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.json-content tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* 删除线样式 */
+.json-content del {
+    color: #999;
+    text-decoration: line-through;
 }
 
 /* 中层：输入区域 */
@@ -50,11 +246,13 @@
     padding: 10px;
     margin-bottom: 10px;
     background-color: #fff;
+    display: flex;
+    flex-direction: column;
 }
 
 .input-section textarea {
     width: 100%;
-    height: 80%;
+    flex: 1;
     border: 3px solid #ccc;
     border-radius: 4px;
     padding: 10px;
@@ -62,6 +260,7 @@
     resize: vertical;
     box-sizing: border-box;
     font-family: inherit;
+    margin-bottom: 8px;
 }
 
 .input-section textarea:focus {
@@ -70,49 +269,243 @@
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
-.button-group {
+
+
+.controls-row {
     display: flex;
-    gap: 5px;
-    margin-top: 5px;
-    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    min-height: 32px;
 }
 
-/* 下层：图片区域 */
-.image-section {
-    flex: 1;
-    min-height: 0;
-    border: 1px solid #ddd;
+.shortcut-hint {
+    font-size: 11px;
+    color: #666;
+    font-style: italic;
+}
+
+.sound-toggle {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.sound-toggle input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+}
+
+.sound-toggle .toggle-text {
+    user-select: none;
+    font-size: 14px;
+}
+
+/* 附言相关样式 */
+.active-postscripts {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin-left: 8px;
+}
+
+.active-postscript-tag {
+    background-color: #1976d2;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    border: none;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.active-postscript-tag:hover {
+    background-color: #1565c0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    transform: translateY(-1px);
+}
+
+.active-postscript-tag:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* 未激活的附言标签样式 */
+.inactive-postscript-tag {
+    background-color: #9e9e9e;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    border: none;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+    opacity: 0.7;
+}
+
+.inactive-postscript-tag:hover {
+    background-color: #757575;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    transform: translateY(-1px);
+    opacity: 0.9;
+}
+
+.inactive-postscript-tag:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* 弹窗样式 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
     border-radius: 8px;
-    padding: 10px;
-    background-color: #fff;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
-.image-preview {
-    border: 3px dashed #ccc;
-    border-radius: 4px;
-    padding: 10px;
-    text-align: center;
-    margin-bottom: 5px;
-    height: 60%;
-    min-height: 0;
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: #333;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #fafafa;
-    transition: border-color 0.3s, background-color 0.3s;
-    overflow: hidden;
+}
+
+.modal-close:hover {
+    color: #333;
+}
+
+.modal-body {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.postscript-list {
+    margin-bottom: 16px;
+}
+
+.postscript-item {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 12px;
+    background-color: #f8f9fa;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.postscript-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    color: #333;
+    font-weight: 500;
+}
+
+.postscript-toggle input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+}
+
+.postscript-toggle span {
+    color: #333;
+    font-size: 14px;
+}
+
+.postscript-title {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    font-size: 14px;
     box-sizing: border-box;
 }
 
-.image-preview.drag-over {
-    border-color: #007bff;
-    background-color: #e3f2fd;
+.postscript-content {
+    width: 100%;
+    min-height: 60px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    resize: vertical;
+    box-sizing: border-box;
 }
 
-.preview-placeholder {
-    color: #999;
-    font-style: italic;
+.btn-add {
+    background-color: #28a745;
+    color: white;
 }
+
+.btn-add:hover {
+    background-color: #1e7e34;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+}
+
+
+
+
 
 /* 按钮样式 */
 .btn {
@@ -142,11 +535,5 @@
     background-color: #545b62;
 }
 
-.btn-upload {
-    background-color: #28a745;
-    color: white;
-}
 
-.btn-upload:hover {
-    background-color: #1e7e34;
-}
+

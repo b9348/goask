@@ -97,12 +97,9 @@ func mcpHandler(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallTool
 		runtime.EventsEmit(app.ctx, "clear")
 	}()
 
-	switch {
-	case answer.Continue && answer.Image == "":
+	if answer.Continue {
 		return mcp.NewToolResultText(answer.Text), nil
-	case answer.Continue && answer.Image != "":
-		return mcp.NewToolResultImage(answer.Text, answer.Image, answer.MimeType), nil
-	default:
+	} else {
 		return mcp.NewToolResultText("The user ended the conversation."), nil
 	}
 }
